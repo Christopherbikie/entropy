@@ -8,6 +8,7 @@ export AR=${HOST}-ar
 export AS=${HOST}-as
 export CC=${HOST}-gcc
 export CXX=${HOST}-g++
+export NASM="nasm -felf32"
  
 export PREFIX=/usr
 export EXEC_PREFIX=$PREFIX
