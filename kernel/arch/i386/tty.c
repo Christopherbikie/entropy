@@ -51,12 +51,20 @@ void terminal_mv_csr(void)
 
 void terminal_putchar(char c)
 {
-	terminal_putentryat(c, terminal_colour, cursor_x, cursor_y);
-	if (++cursor_x == VGA_WIDTH)
+	if (c == '\n')
 	{
+		cursor_y++;
 		cursor_x = 0;
-		if (++cursor_y == VGA_HEIGHT)
-			cursor_y = 0;
+	}
+	else
+	{
+		terminal_putentryat(c, terminal_colour, cursor_x, cursor_y);
+		if (++cursor_x == VGA_WIDTH)
+		{
+			cursor_x = 0;
+			if (++cursor_y == VGA_HEIGHT)
+				cursor_y = 0;
+		}
 	}
 	terminal_mv_csr();
 }
