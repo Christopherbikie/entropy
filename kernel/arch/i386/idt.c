@@ -1,5 +1,6 @@
 #include <kernel/idt.h>
 #include <string.h>
+#include <stdio.h>
 
 #define IDT_NUM_ENTRIES 256
 
@@ -33,6 +34,8 @@ void idt_set_gate(uint8_t n, uint32_t base, uint16_t selector, uint8_t type_attr
 
 void idt_init()
 {
+	printf("Initialising the IDT... ");
+	
 	struct idt_ptr idt_ptr;
 	idt_ptr.limit = sizeof(struct idt_entry) * IDT_NUM_ENTRIES - 1;
 	idt_ptr.base = (uint32_t) &idt;
@@ -40,5 +43,7 @@ void idt_init()
 	memset(&idt, 0x00, sizeof(struct idt_entry) * IDT_NUM_ENTRIES);
 	
 	idt_load((uint32_t) &idt_ptr);
+	
+	printf("done\n");
 }
 

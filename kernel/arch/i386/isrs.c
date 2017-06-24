@@ -61,7 +61,7 @@ extern void isr_stub_31();
 
 void isrs_init()
 {
-	printf("Setting Interrupt Service Routines... ");
+	printf("Setting ISRs... ");
 	
 	IDT_SET_GATE_N(0)
 	IDT_SET_GATE_N(1)

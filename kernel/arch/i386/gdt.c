@@ -1,6 +1,7 @@
-#include <stdint.h>
-
 #include "kernel/gdt.h"
+
+#include <stdint.h>
+#include <stdio.h>
 
 #define SEGMENT_BASE    0
 #define SEGMENT_LIMIT   0xFFFFF
@@ -61,6 +62,8 @@ static struct gdt_entry make_desc(enum seg_privilege dpl, uint8_t type)
 
 void gdt_init()
 {
+	printf("Initialising the GDT... ");
+	
 	gdt[0] = make_desc(0, 0);
 	gdt[1] = make_desc(PRIV_KERNEL, CODE_RX_TYPE);
 	gdt[2] = make_desc(PRIV_KERNEL, DATA_RW_TYPE);
@@ -72,4 +75,6 @@ void gdt_init()
     gdt_ptr.base = (uint32_t) &gdt;
 	
 	gdt_load_and_set((uint32_t) &gdt_ptr);
+	
+	printf("done\n");
 }

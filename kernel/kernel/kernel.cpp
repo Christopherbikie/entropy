@@ -10,9 +10,12 @@ void kernel_main(void)
 {
 	terminal_initialise();
 	
+	printf("\nEntopy kernel v0.0.1\n\n");
+	printf("Initialising CPU (i386)\n");
+	
 	gdt_init();
 	idt_init();
 	isrs_init();
-
-	printf("Hello, world!\n");
+	
+	printf("\nHello, world!\n");
 }

@@ -27,6 +27,8 @@ void terminal_initialise(void)
 	terminal_colour = vga_entry_colour(VGA_COLOUR_LIGHT_GREY, VGA_COLOUR_BLACK);
 	terminal_buffer = VGA_MEMORY;
 	terminal_clear();
+	
+	terminal_writestr("Terminal initialised\n");
 }
 
 void terminal_setcolour(uint8_t colour)
@@ -75,7 +77,7 @@ void terminal_write(const char* data, size_t size)
 		terminal_putchar(data[i]);
 }
 
-void terminal_writestring(const char* data)
+void terminal_writestr(const char* data)
 {
 	terminal_write(data, strlen(data));
 }
