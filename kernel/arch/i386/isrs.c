@@ -20,7 +20,7 @@
 int isr_handler(struct registers regs)
 {
 	printf("recieved interrupt ");
-	for (int i = 0; i < regs.int_no; i++)
+	for (uint32_t i = 0; i < regs.int_no; i++)
 		printf("+");
 	printf("\n");
 	return 0;
