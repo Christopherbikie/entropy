@@ -1,5 +1,7 @@
 #include <kernel/isrs.h>
 #include <stdio.h>
+#include <stddef.h>
+#include <stdlib.h>
 
 #include <kernel/idt.h>
 
@@ -19,10 +21,8 @@
 
 int isr_handler(struct registers regs)
 {
-	printf("recieved interrupt ");
-	for (uint32_t i = 0; i < regs.int_no; i++)
-		printf("+");
-	printf("\n");
+	char *buf = itoa(regs.int_no, NULL, 16);
+	printf("recieved interrupt 0x%s\n", buf);
 	return 0;
 }
 

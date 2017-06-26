@@ -18,4 +18,7 @@ void kernel_main(void)
 	isrs_init();
 	
 	printf("\nHello, world!\n");
+
+	printf("Triggering a breakpoint interrupt...\n");
+	asm volatile("int $0x03");
 }
