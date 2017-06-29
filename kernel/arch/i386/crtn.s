@@ -1,7 +1,7 @@
-.section .init
-	popl %ebp
+section .init
+	pop ebp
 	ret
 
-.section .final
-	popl %ebp
+section .final
+	pop ebp
 	ret
