@@ -48,7 +48,7 @@ $(ARCHDIR)/crtend.o \
 $(ARCHDIR)/crtn.o \
 
 .PHONY: all clean install install-headers install-kernel
-.SUFFIXES: .o .c .s .asm
+.SUFFIXES: .o .c .s
 
 all: entropy.kernel
 
@@ -66,9 +66,6 @@ $(ARCHDIR)/crtbegin.o $(ARCHDIR)/crtend.o:
 	$(CXX) -MD -c $< -o $@ -fno-exceptions -fno-rtti $(CFLAGS) $(CPPFLAGS)
 
 .s.o:
-	$(CC) -MD -c $< -o $@ $(CFLAGS) $(CPPFLAGS)
-
-.asm.o:
 	$(NASM) $< -o $@
 
 clean:
