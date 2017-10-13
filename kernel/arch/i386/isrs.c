@@ -19,10 +19,38 @@
  */
 #define IDT_SET_GATE_N(idx) idt_set_gate(idx, (uint32_t) &isr_stub_##idx, 0x08, 0x8E);
 
+char *exception_messages[] =
+{
+	"Division By Zero",
+	"Debug",
+	"Non Maskable Interrupt",
+	"Breakpoint",
+	"Into Detected Overflow",
+	"Out of Bounds",
+	"Invalid Opcode",
+	"No Coprocessor",
+	"Double Fault",
+	"Coprocessor Segment Overrun",
+	"Bad TSS",
+	"Segment Not Present",
+	"Stack Fault",
+	"General Protection Fault",
+	"Page Fault",
+	"Unknown Interrupt",
+	"Coprocessor Fault",
+	"Alignment Check",
+	"Machine Check"
+};
+
 int isr_handler(struct registers regs)
 {
 	char *buf = itoa(regs.int_no, NULL, 16);
-	printf("recieved interrupt 0x%s\n", buf);
+	if (regs.int_no <= 0x12)
+		printf("recieved interrupt 0x%s: %s\n", buf, exception_messages[regs.int_no]);
+	else if (regs.int_no < 0x20)
+		printf("recieved interrupt 0x%s : Reserved Exception\n", buf);
+	else
+		printf("recieved interrupt 0x%s\n", buf);
 	return 0;
 }
 
